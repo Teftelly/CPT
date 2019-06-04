@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+	<body>
+		<div class="header">
+            <h4 align="right">
+                <a href="{% url 'registration' %}">РЕГИСТРАЦИЯ</a>
+            </h4>
+			<img src="{% static "images/people.png" %}">
+			<link rel="stylesheet" href="{% static 'css/article.css' %}">
+		</div>
+		<div class="archive">
+			{% for post in posts %}
+				<div class="one-post">
+					<h2 class="post-title">
+						<a href="/article/{{ post.id }}">{{ post.title }}</a>
+					</h2>
+					<div class="article-info">
+						<div class="article-author">{{ post.author.username }}</div>
+						<div class="article-createddate">{{ post.created_date }}</div>
+					</div>
+				</div>
+			{% endfor %}
+			<p class="article-text">{{ post.get_excerpt }}</p>
+		</div>
+	</body>
+</html>
