@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Архив статей</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/article.css' %}">
+    </head>
+    <body>
+        <div class="header">
+            <h4 align=right>
+                    <a href="{% url 'registration' %}" >РЕГИСТРАЦИЯ</a>
+            </h4>
+            <img class="image" src="{% static "images/people.png" %}">
+        <p>{{user.username}}</p>
+        <input class = "buttonf" type="button" value="Создать статью" onClick='location.href="http://127.0.0.1:8000/article/new/"'>
+        <h2>Архив всех статей</h2>
+        </div>
+        <div class="archive">
+        {% for post in posts %}
+            <div class="one-post">
+                <h2 class="post-title">
+                    <a href="/article/{{ post.id }}">{{ post.title }}</a>
+                    <input class="fold-button" type="button" value="Свернуть" style="float: right;">
+                </h2>
+                <div class="inner-post">
+                    <div class="article-info">
+                        <div class="article-author" >{{ post.author.username }}</div>
+                        <div class="article-createddate">{{ post.created_date }}</div>
+                    </div> 
+                    <p class="article-text">{{ post.get_excerpt }}</p>
+                    <div class="one-post-shadow"></div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+        <script language="JavaScript" src="{% static 'js/jquery-3.4.1.js' %}"></script>
+        <script language="JavaScript" src="{% static 'js/helloworld.js' %}"></script>
+        <script language="JavaScript" src="{% static 'js/fold-post.js' %}"></script>
+        <script language="JavaScript" src="{% static 'js/highlight-post.js' %}"></script>
+    </body>
+</html>
+
