@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Архив статей</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/article.css' %}">
+    </head>
+    <body>
+        <div class="header">
+          <img class="image" src="{% static "images/people.png" %}">
+            <div class="left-block"> 
+                    <p class="name-of-blog">КОЛЛЕКТИВНЫЙ БЛОГ</p>
+                    <a class="registration" href="{% url 'registration' %}" >РЕГИСТРАЦИЯ</a>
+                    <a class="autorisation" href="{% url 'avtorisation' %}" >ВХОД</a>
+                    <p class="user" >{{user.username}}</p>
+                    <input class = "buttonf" type="button" value="Создать статью" onClick='location.href="http://127.0.0.1:8000/article/new/"'>
+            </div>
+            <div class="right-block-for-icons"> 
+            <img class="icon-low" src="{% static "images/icon.png" %}">
+            <img class="icon-mid" src="{% static "images/icon.png" %}">
+            <img class="icon-top" src="{% static "images/icon.png" %}">
+            </div>
+          <div class="color-for-header"></div>  
+       
+        </div>
+        <div class="archive">
+        <p class="name-of-archive">АРХИВ ВСЕХ СТАТЕЙ</p>
+        {% for post in posts %}
+            <div class="one-post">
+                <h2 class="post-title">
+                    <a href="/article/{{ post.id }}">{{ post.title }}</a>
+                    <input class="fold-button" type="button" value="Свернуть" style="float: right;">
+                </h2>
+                <div class="inner-post">
+                    <div class="article-info">
+                        <div class="article-author" >{{ post.author.username }}</div>
+                        <div class="article-createddate">{{ post.created_date }}</div>
+                    </div> 
+                    <p class="article-text">{{ post.get_excerpt }}</p>
+                    <div class="one-post-shadow"></div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="color-for-archive"></div>
+        </div>
+        <script language="JavaScript" src="{% static 'js/jquery-3.4.1.js' %}"></script>
+        <script language="JavaScript" src="{% static 'js/helloworld.js' %}"></script>
+        <script language="JavaScript" src="{% static 'js/fold-post.js' %}"></script>
+        <script language="JavaScript" src="{% static 'js/highlight-post.js' %}"></script>
+        <script language="JavaScript" src="{% static 'js/parallax.js' %}"></script>
+    </body>
+</html>
+
